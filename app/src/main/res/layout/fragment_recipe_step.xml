@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-            android:id="@+id/sepv_recipePlayer"
+        <android.support.percent.PercentFrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" >
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:id="@+id/sepv_recipePlayer"
+                app:layout_aspectRatio="178%"
+                app:layout_widthPercent="100%"/>
+        </android.support.percent.PercentFrameLayout>
 
         <TextView
             android:id="@+id/tv_description"

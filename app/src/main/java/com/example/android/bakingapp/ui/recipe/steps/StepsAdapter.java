@@ -3,65 +3,86 @@ package com.example.android.bakingapp.ui.recipe.steps;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.android.bakingapp.R;
 import com.example.android.bakingapp.data.Step;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.example.android.bakingapp.ui.utils.UiUtils.backgroundTarget;
 
 
-public class StepsAdapter extends ArrayAdapter<Step> {
+class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHolder> {
+
     private static final String TAG = StepsAdapter.class.getSimpleName();
+    private Step[] steps;
     private OnStepClicked onStepClickedListener;
 
-    public StepsAdapter(@NonNull Context context) {
-        super(context, R.layout.steps_item);
+    @Override
+    public StepsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        return new StepsViewHolder(inflater.inflate(R.layout.steps_item, parent, false));
+
     }
 
-    @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public void onBindViewHolder(StepsViewHolder holder, int position) {
+        holder.bind(position);
+    }
 
-        final Step step = getItem(position);
+    @Override
+    public int getItemCount() {
+        return steps == null ? 0 : steps.length;
+    }
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(this.getContext())
-                    .inflate(R.layout.steps_item, parent, false);
+    public void setSteps(Step[] steps) {
+        this.steps = steps;
+        notifyDataSetChanged();
+    }
+
+    void setOnStepClickedListener(OnStepClicked onStepClickedListener) {
+        this.onStepClickedListener = onStepClickedListener;
+    }
+
+
+    class StepsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private final Context mContext;
+
+        @BindView(R.id.tv_step)
+        TextView stepTextView;
+
+        StepsViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            mContext = itemView.getContext();
+
+            itemView.setOnClickListener(this);
         }
 
-        TextView textViewStep = (TextView) convertView.findViewById(R.id.tv_step);
-        textViewStep.setText(step.getShortDescription());
-        //textViewStep.setText(String.format(getContext().getString(R.string.step_number), position));
-        if (!"".equals(step.getThumbnailURL())){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                Picasso.with(getContext()).load(Uri.parse(step.getThumbnailURL())).into(backgroundTarget(getContext(), textViewStep));
-            }
-        }
-
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onStepClickedListener != null) {
-                    onStepClickedListener.stepClicked(step);
-                } else {
-                    Log.w(TAG, "no step click listener added!");
+        void bind(final int itemIndex) {
+            final Step step = steps[itemIndex];
+            stepTextView.setText(step.getShortDescription());
+            //textViewStep.setText(String.format(getContext().getString(R.string.step_number), position));
+            if (!"".equals(step.getThumbnailURL())) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    Picasso.with(mContext).load(Uri.parse(step.getThumbnailURL())).into(backgroundTarget(mContext, stepTextView));
                 }
             }
-        });
 
-        return convertView;
-    }
+        }
 
-    public void setOnStepClickedListener(OnStepClicked onStepClickedListener) {
-        this.onStepClickedListener = onStepClickedListener;
+        @Override
+        public void onClick(View v) {
+            final int clickedPosition = getAdapterPosition();
+            onStepClickedListener.stepClicked(steps[clickedPosition]);
+        }
     }
 }

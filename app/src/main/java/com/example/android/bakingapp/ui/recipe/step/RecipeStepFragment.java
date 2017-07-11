@@ -14,8 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.android.bakingapp.R;
@@ -38,7 +36,9 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListener {
 
@@ -47,10 +47,17 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
 
     private SimpleExoPlayer mExoPlayer;
     private static MediaSessionCompat mMediaSession;
-    private PlaybackStateCompat.Builder mStateBuilder;
 
-    private TextView mDescriptionView;
-    private SimpleExoPlayerView mPlayerView;
+    @BindView(R.id.tv_description)
+    TextView mDescriptionView;
+    @BindView(R.id.sepv_recipePlayer)
+    SimpleExoPlayerView mPlayerView;
+
+    private PlaybackStateCompat.Builder mStateBuilder;
+    private Step mStep;
+
+    private Unbinder unbinder;
+    private boolean isCreateViewAlreadyCalled = false;
 
     public RecipeStepFragment() {
     }
@@ -59,32 +66,34 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_recipe_step, container, false);
-
-        mPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.sepv_recipePlayer);
-        /*if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE){
-
-        } else {*/
-            mPlayerView.setMinimumHeight(mPlayerView.getWidth() * 9 / 16);
-        //}
-
-        mDescriptionView = ((TextView) rootView.findViewById(R.id.tv_description));
+        unbinder = ButterKnife.bind(this, rootView);
 
         initializeMediaSession();
+        isCreateViewAlreadyCalled = true;
+        bindStepToView();
 
         return rootView;
     }
 
-    public void setStep(Step step) {
-        if (!"".equals(step.getVideoURL())) {
-            Log.d(TAG, "playing video: " + step.getVideoURL());
-            mPlayerView.setVisibility(View.VISIBLE);
-            Uri uri = Uri.parse(step.getVideoURL());
-            initializePlayer(uri);
-        } else {
-            mPlayerView.setVisibility(View.GONE);
-            releasePlayer();
+    private void bindStepToView() {
+        if (mStep != null && isCreateViewAlreadyCalled) {
+            if (!"".equals(mStep.getVideoURL())) {
+                Log.d(TAG, "playing video: " + mStep.getVideoURL());
+                mPlayerView.setVisibility(View.VISIBLE);
+
+                Uri uri = Uri.parse(mStep.getVideoURL());
+                initializePlayer(uri);
+            } else {
+                mPlayerView.setVisibility(View.GONE);
+                releasePlayer();
+            }
+            mDescriptionView.setText(mStep.getDescription());
         }
-        mDescriptionView.setText(step.getDescription());
+    }
+
+    public void setStep(Step step) {
+        mStep = step;
+        bindStepToView();
     }
 
 
@@ -226,6 +235,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        unbinder.unbind();
         releasePlayer();
         mMediaSession.setActive(false);
     }

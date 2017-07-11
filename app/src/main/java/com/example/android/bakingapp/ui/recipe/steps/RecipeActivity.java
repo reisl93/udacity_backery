@@ -32,7 +32,7 @@ public class RecipeActivity extends AppCompatActivity implements OnStepClicked {
             return;
         }
 
-        isMultiView = findViewById(R.id.f_recipe_step) != null;
+        isMultiView = findViewById(R.id.f_recipe_step_container) != null;
 
         ((MasterListRecipeStepsFragment) getSupportFragmentManager().findFragmentById(R.id.master_list_fragment))
                 .setRecipe(mRecipe)
@@ -47,7 +47,7 @@ public class RecipeActivity extends AppCompatActivity implements OnStepClicked {
             stepFragment.setStep(mRecipe.getSteps()[0]);
             // Add the fragment to its container using a transaction
             fragmentManager.beginTransaction()
-                    .add(R.id.f_recipe_step, stepFragment)
+                    .add(R.id.f_recipe_step_container, stepFragment)
                     .commit();
         }
 
@@ -59,7 +59,7 @@ public class RecipeActivity extends AppCompatActivity implements OnStepClicked {
             RecipeStepFragment stepFragment = new RecipeStepFragment();
             stepFragment.setStep(step);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.f_recipe_step, stepFragment)
+                    .replace(R.id.f_recipe_step_container, stepFragment)
                     .commit();
         } else {
             final Intent showRecipeActivity = new Intent(this, RecipeStepActivity.class);

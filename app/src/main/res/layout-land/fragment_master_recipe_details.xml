@@ -22,8 +22,8 @@
             style="@style/title_text"
             android:text="@string/steps" />
 
-        <ListView
-            android:id="@+id/lv_steps"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_steps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -46,8 +46,8 @@
             style="@style/title_text"
             android:text="@string/ingredients" />
 
-        <ListView
-            android:id="@+id/lv_ingredients"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
