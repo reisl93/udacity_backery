@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Bakingapp</string>
-    <string name="serving">Servings: %d</string>
+    <string name="serving">Servings: %s</string>
+    <string name="next_step">Next Step</string>
+    <string name="steps">Steps</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="step_number">Step: %d</string>
 </resources>

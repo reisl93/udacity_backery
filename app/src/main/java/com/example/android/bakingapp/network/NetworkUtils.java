@@ -18,9 +18,9 @@ public class NetworkUtils {
     public static <T> T getObjectFromHttpUrlJsonResponse(final URL url, final Class<T> tClass) throws IOException {
         return new Gson().fromJson(getResponseFromHttpUrl(url), tClass);
     }
+    @Nullable
 
-    public static @Nullable
-    String getResponseFromHttpUrl(final URL url) throws IOException {
+    public static String getResponseFromHttpUrl(final URL url) throws IOException {
         Log.d(TAG, "Loading url " + url);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

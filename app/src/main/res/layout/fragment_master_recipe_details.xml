@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/horizontal_padding"
+    android:paddingRight="@dimen/horizontal_padding">
     <TextView
         android:id="@+id/tv_ingredients"
-        android:text="Ingredients"
-        style="@style/title_text" />
+        style="@style/title_text"
+        android:text="@string/ingredients" />
 
     <ListView
+        android:id="@+id/lv_ingredients"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_steps"
+        style="@style/title_text"
+        android:paddingTop="@dimen/vertical_padding"
+        android:text="@string/steps" />
+
+    <ListView
+        android:id="@+id/lv_steps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

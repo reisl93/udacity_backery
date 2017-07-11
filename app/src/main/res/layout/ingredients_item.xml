@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/horizontal_padding"
+    android:paddingRight="@dimen/horizontal_padding"
+    >
+
+
+    <TextView
+        android:id="@+id/tv_ingredient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        tools:text="Cookiiess"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_quantity" />
+
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textSize="@dimen/text_size_small"
+        tools:text="150"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tv_measure" />
+
+    <TextView
+        android:id="@+id/tv_measure"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textSize="@dimen/text_size_small"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        tools:text="G"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+</android.support.constraint.ConstraintLayout>

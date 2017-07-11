@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.GridView;
 
 import com.example.android.bakingapp.R;
@@ -11,8 +12,7 @@ import com.example.android.bakingapp.data.Recipe;
 import com.example.android.bakingapp.network.RecipesLoader;
 
 public class RecipesOverviewActivity extends AppCompatActivity {
-
-
+    private static final String TAG = RecipesOverviewActivity.class.getSimpleName();
     private RecipesAdapter mRecipesAdapter;
 
     @Override
@@ -34,8 +34,11 @@ public class RecipesOverviewActivity extends AppCompatActivity {
         @Override
         public void onLoadFinished(Loader<Recipe[]> loader, Recipe[] data) {
             if (data != null) {
+                Log.d(TAG, "loading successful");
                 mRecipesAdapter.clear();
                 mRecipesAdapter.addAll(data);
+            } else {
+                Log.w(TAG, "loading not successful");
             }
         }
 
