@@ -31,6 +31,13 @@ public class RecipeStepActivity extends AppCompatActivity {
         if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+            getSupportActionBar().hide();
+        } else {
+
         }
 
         setContentView(R.layout.activity_recipe_step);
@@ -70,5 +77,10 @@ public class RecipeStepActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(EXTRA_STEP_ID, mStepId);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }

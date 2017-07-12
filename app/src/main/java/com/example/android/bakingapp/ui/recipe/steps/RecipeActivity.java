@@ -32,6 +32,8 @@ public class RecipeActivity extends AppCompatActivity implements OnStepClicked {
             return;
         }
 
+        getSupportActionBar().setTitle(mRecipe.getName());
+
         isMultiView = findViewById(R.id.f_recipe_step_container) != null;
 
         ((MasterListRecipeStepsFragment) getSupportFragmentManager().findFragmentById(R.id.master_list_fragment))
