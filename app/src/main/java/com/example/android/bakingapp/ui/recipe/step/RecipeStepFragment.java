@@ -50,8 +50,10 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
 
     @BindView(R.id.tv_description)
     TextView mDescriptionView;
-    @BindView(R.id.sepv_recipePlayer)
+    @BindView(R.id.playerView)
     SimpleExoPlayerView mPlayerView;
+    @BindView(R.id.pfl_exoPlayerContainer)
+    View mPercentageLayout;
 
     private PlaybackStateCompat.Builder mStateBuilder;
     private Step mStep;
@@ -79,12 +81,12 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
         if (mStep != null && isCreateViewAlreadyCalled) {
             if (!"".equals(mStep.getVideoURL())) {
                 Log.d(TAG, "playing video: " + mStep.getVideoURL());
-                mPlayerView.setVisibility(View.VISIBLE);
+                mPercentageLayout.setVisibility(View.VISIBLE);
 
                 Uri uri = Uri.parse(mStep.getVideoURL());
                 initializePlayer(uri);
             } else {
-                mPlayerView.setVisibility(View.GONE);
+                mPercentageLayout.setVisibility(View.GONE);
                 releasePlayer();
             }
             mDescriptionView.setText(mStep.getDescription());
@@ -233,10 +235,26 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (mExoPlayer != null){
+            mExoPlayer.setPlayWhenReady(true);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mExoPlayer != null){
+            mExoPlayer.setPlayWhenReady(false);
+        }
+    }
+
+    @Override
     public void onDestroyView() {
-        super.onDestroyView();
         unbinder.unbind();
         releasePlayer();
         mMediaSession.setActive(false);
+        super.onDestroyView();
     }
 }

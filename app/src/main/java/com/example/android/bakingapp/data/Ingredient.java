@@ -7,6 +7,13 @@ import android.os.Parcelable;
 public class Ingredient implements Parcelable{
     private double quantity;
     private String measure;
+
+    public Ingredient(double quantity, String measure, String ingredient) {
+        this.quantity = quantity;
+        this.measure = measure;
+        this.ingredient = ingredient;
+    }
+
     private String ingredient;
 
     protected Ingredient(Parcel in) {

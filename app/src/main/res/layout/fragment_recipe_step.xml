@@ -9,10 +9,11 @@
         android:orientation="vertical">
 
         <android.support.percent.PercentFrameLayout
+            android:id="@+id/pfl_exoPlayerContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
             <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-                android:id="@+id/sepv_recipePlayer"
+                android:id="@+id/playerView"
                 app:layout_aspectRatio="178%"
                 app:layout_widthPercent="100%"/>
         </android.support.percent.PercentFrameLayout>
