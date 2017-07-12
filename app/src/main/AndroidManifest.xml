@@ -54,7 +54,6 @@
                 android:resource="@xml/ingredients_app_widget_info" />
         </receiver>
 
-
         <provider
             android:name=".provider.generated.RecipeProvider"
             android:authorities="com.example.android.bakingapp.RecipesProvider"

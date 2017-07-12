@@ -3,6 +3,7 @@ package com.example.android.bakingapp.provider;
 import net.simonvt.schematic.annotation.Database;
 import net.simonvt.schematic.annotation.Table;
 
+@SuppressWarnings("WeakerAccess") // since generated
 @Database(version = RecipeDatabase.VERSION)
 public final class RecipeDatabase {
 

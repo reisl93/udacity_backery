@@ -1,10 +1,8 @@
 package com.example.android.bakingapp.ui.widget;
 
 import android.annotation.TargetApi;
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -13,7 +11,6 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.example.android.bakingapp.R;
-import com.example.android.bakingapp.provider.RecipeProvider;
 
 /**
  * Implementation of App Widget functionality.

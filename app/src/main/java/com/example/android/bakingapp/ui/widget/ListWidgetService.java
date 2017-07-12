@@ -22,10 +22,10 @@ public class ListWidgetService extends RemoteViewsService {
 class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private static final String TAG = ListRemoteViewsFactory.class.getSimpleName();
-    private Context mContext;
+    private final Context mContext;
     private Cursor mIngredientsCursor;
 
-    public ListRemoteViewsFactory(Context applicationContext) {
+    ListRemoteViewsFactory(Context applicationContext) {
         mContext = applicationContext;
 
     }
@@ -41,7 +41,7 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         mIngredientsCursor = mContext.getContentResolver().query(
                 RecipeProvider.LAST_USED_RECIPE_INGREDIENTS.INGREDIENTS, null, null, null, null
         );
-        Log.d(TAG, "Widget loaded ingredients: " + mIngredientsCursor.getCount());
+        Log.d(TAG, "Widget loaded ingredients: " + getCount());
     }
 
     @Override

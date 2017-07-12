@@ -36,8 +36,6 @@ public class RecipeStepActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
             getSupportActionBar().hide();
-        } else {
-
         }
 
         setContentView(R.layout.activity_recipe_step);
@@ -63,7 +61,7 @@ public class RecipeStepActivity extends AppCompatActivity {
         showStep();
     }
 
-    public void showStep() {
+    private void showStep() {
         RecipeStepFragment stepFragment = (RecipeStepFragment) getSupportFragmentManager().findFragmentById(R.id.f_recipe_step);
         if (mStepId < mRecipe.getSteps().length) {
             stepFragment.setStep(mRecipe.getSteps()[mStepId]);
@@ -77,10 +75,5 @@ public class RecipeStepActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(EXTRA_STEP_ID, mStepId);
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 }

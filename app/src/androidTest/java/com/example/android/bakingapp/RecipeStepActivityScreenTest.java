@@ -1,7 +1,6 @@
 package com.example.android.bakingapp;
 
 import android.content.Intent;
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -15,7 +14,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
@@ -33,10 +31,10 @@ import static org.hamcrest.Matchers.not;
 public class RecipeStepActivityScreenTest {
 
     @Rule
-    public ActivityTestRule<RecipeStepActivity> mActivityTestRule = new ActivityTestRule<>(RecipeStepActivity.class, true, false);
+    public final ActivityTestRule<RecipeStepActivity> mActivityTestRule = new ActivityTestRule<>(RecipeStepActivity.class, true, false);
 
-    private String descriptionText1 = "AAAA";
-    private String descriptionText2 = "XXXXXXXX";
+    private final static String descriptionText1 = "AAAA";
+    private final static String descriptionText2 = "XXXXXXXX";
 
     @Before
     public void launchActivityWithIntent() {

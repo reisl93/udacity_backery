@@ -40,9 +40,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+@SuppressWarnings("WeakerAccess") // since butterknife
 public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListener {
-
-
     private static final java.lang.String TAG = RecipeStepFragment.class.getSimpleName();
 
     private SimpleExoPlayer mExoPlayer;

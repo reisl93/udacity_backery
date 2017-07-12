@@ -2,6 +2,7 @@ package com.example.android.bakingapp.ui.recipe.steps;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,7 +33,10 @@ public class RecipeActivity extends AppCompatActivity implements OnStepClicked {
             return;
         }
 
-        getSupportActionBar().setTitle(mRecipe.getName());
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setTitle(mRecipe.getName());
+        }
 
         isMultiView = findViewById(R.id.f_recipe_step_container) != null;
 

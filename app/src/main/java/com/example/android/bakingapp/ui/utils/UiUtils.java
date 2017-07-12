@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.example.android.bakingapp.data.Recipe;
 import com.example.android.bakingapp.network.NetworkUtils;
-import com.example.android.bakingapp.network.RecipesLoader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 

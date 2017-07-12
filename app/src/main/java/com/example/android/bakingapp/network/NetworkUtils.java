@@ -20,7 +20,7 @@ public class NetworkUtils {
     }
     @Nullable
 
-    public static String getResponseFromHttpUrl(final URL url) throws IOException {
+    private static String getResponseFromHttpUrl(final URL url) throws IOException {
         Log.d(TAG, "Loading url " + url);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

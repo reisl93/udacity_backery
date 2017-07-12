@@ -1,7 +1,5 @@
 package com.example.android.bakingapp.ui.recipe.overview;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +20,6 @@ import com.example.android.bakingapp.data.Recipe;
 import com.example.android.bakingapp.provider.IngredientsColumns;
 import com.example.android.bakingapp.provider.RecipeProvider;
 import com.example.android.bakingapp.ui.recipe.steps.RecipeActivity;
-import com.example.android.bakingapp.ui.widget.IngredientsAppWidgetProvider;
 import com.squareup.picasso.Picasso;
 
 import static com.example.android.bakingapp.ui.utils.UiUtils.backgroundTarget;
@@ -81,14 +78,6 @@ class RecipesAdapter extends ArrayAdapter<Recipe> {
                 getContext().getContentResolver().bulkInsert(RecipeProvider.LAST_USED_RECIPE_INGREDIENTS.INGREDIENTS, contentValues);
 
                 startActionUpdateIngredientsWidgets(getContext());
-
-                /*AppWidgetManager widgetManager = AppWidgetManager.getInstance(getContext());
-                ComponentName widgetComponent = new ComponentName(getContext(), IngredientsAppWidgetProvider.class);
-                int[] widgetIds = widgetManager.getAppWidgetIds(widgetComponent);
-                Intent update = new Intent();
-                update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds);
-                update.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                getContext().sendBroadcast(update);*/
             }
         });
 

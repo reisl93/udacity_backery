@@ -6,6 +6,7 @@ import net.simonvt.schematic.annotation.ContentProvider;
 import net.simonvt.schematic.annotation.ContentUri;
 import net.simonvt.schematic.annotation.TableEndpoint;
 
+@SuppressWarnings("WeakerAccess") // since generated
 @ContentProvider(authority = RecipeProvider.AUTHORITY, database = RecipeDatabase.class)
 public class RecipeProvider {
 

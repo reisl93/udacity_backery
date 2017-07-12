@@ -21,7 +21,6 @@ import static com.example.android.bakingapp.ui.utils.UiUtils.backgroundTarget;
 
 class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHolder> {
 
-    private static final String TAG = StepsAdapter.class.getSimpleName();
     private Step[] steps;
     private OnStepClicked onStepClickedListener;
 
